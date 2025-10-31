@@ -15,15 +15,18 @@ def pregunta_12():
     {'A': 177, 'B': 187, 'C': 114, 'D': 136, 'E': 324}
 
     """
+    result = {}
     with open("files/input/data.csv", "r") as file:
-        letter_sums = {}
         for line in file:
-            parts = line.split("\t")
-            letter = parts[0]
-            col5_values = map(int, parts[4].split(","))
-            total_col5 = sum(col5_values)
-            if letter in letter_sums:
-                letter_sums[letter] += total_col5
+            columns = line.strip().split("\t")
+            key = columns[0]
+            column_5_values = columns[4].split(",")
+            value = sum(int(num[4:]) for num in column_5_values)
+            if key in result:
+                result[key] += value
             else:
-                letter_sums[letter] = total_col5
-    return dict(sorted(letter_sums.items()))
+                result[key] = value
+    return dict(sorted(result.items()))
+
+if __name__ == "__main__":
+    print(pregunta_12())
