@@ -15,3 +15,15 @@ def pregunta_03():
     [('A', 53), ('B', 36), ('C', 27), ('D', 31), ('E', 67)]
 
     """
+    with open("files/input/data.csv","r" ) as file:
+        letter_sums = {}
+        for line in file:
+            columns = line.split("\t")
+            letter = columns[0]
+            number = int(columns[1])
+            if letter in letter_sums:
+                letter_sums[letter] += number
+            else:
+                letter_sums[letter] = number
+    return sorted(letter_sums.items())
+print(pregunta_03())

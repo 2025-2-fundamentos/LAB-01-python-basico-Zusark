@@ -25,3 +25,15 @@ def pregunta_07():
      (9, ['A', 'B', 'E', 'A', 'A', 'C'])]
 
     """
+    with open("files/input/data.csv", "r") as file:
+        value_to_letters = {}
+        for line in file:
+            parts = line.split("\t")
+            letter = parts[0]
+            value = int(parts[1])
+            if value in value_to_letters:
+                value_to_letters[value].append(letter)
+            else:
+                value_to_letters[value] = [letter]
+    result = [(value, letters) for value, letters in value_to_letters.items()]
+    return sorted(result)
